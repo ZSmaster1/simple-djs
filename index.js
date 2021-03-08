@@ -31,34 +31,6 @@ class Main {
 
 
     /**
-     * @param { Boolean } true_or_false 
-     */
-    allowsDMs(true_or_false) {
-        if(typeof true_or_false !== 'boolean') {
-            this.log.warn('true_or_false must be true or false');
-            return;
-        }
-
-        this.DMs = true_or_false;
-
-        return this;
-    }
-
-    /**
-     * @param { Boolean } true_or_false 
-     */
-    allowGuilds(true_or_false) {
-        if(typeof true_or_false !== 'boolean') {
-            this.log.warn('true_or_false must be true or false');
-            return;
-        }
-
-        this.guilds = true_or_false;
-
-        return this;
-    }
-
-    /**
      * @param { String } commandsDir 
      */
     setCommandsDir(commandsDir) {
