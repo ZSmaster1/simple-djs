@@ -1,0 +1,22 @@
+{
+  "name": "simple-djs",
+  "version": "0.0.0",
+  "description": "A fast and beginner friendly way to use the discord.js package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZSmaster1/simple-djs.git"
+  },
+  "author": "Zaakir Sheikh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZSmaster1/simple-djs/issues"
+  },
+  "homepage": "https://github.com/ZSmaster1/simple-djs#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
