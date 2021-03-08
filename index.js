@@ -1,14 +1,17 @@
-const client = require('./src/client');
-const logger = require('./src/logger');
+const Client = require('./src/client');
+const Logger = require('./src/logger');
+const Command = require('./src/command');
+const fs = require('fs');
+const path = require('path');
 
 class Main {
 
     /**
      * @param { String } token Your bots token
-     * @param { Object } configuration The configuration
+     * @param { String } defaultPrefix Your bots default prefix
      */
     constructor(token) {
-        this.log = new logger();
+        this.log = new Logger();
 
         if(!token) {
             this.log.error('No token specified');
@@ -18,7 +21,7 @@ class Main {
             this.log.error('Token must be a string');
         }
 
-        this.client = new client(token);
+        this.client = new Client(token);
         this.DMs = false;
         this.guilds = true;
         this.commandsDir = 'commands';
@@ -69,8 +72,40 @@ class Main {
         return this;
     }
 
+    setDefaultPrefix(prefix) {
+
+        if(typeof prefix !== 'string') {
+            this.log.error('Default prefix must be a string');
+        }
+
+        this.defaultPrefix = prefix;
+
+        return this;
+    }
+
     load() {
-        
+
+        if(!fs.existsSync(`./${this.commandsDir}`)) {
+            this.log.error(`./${this.commandsDir} doesen't exist!`);
+        }
+
+        const readCommands = (dir) => {
+            const files = fs.readdirSync(path.join(__dirname, dir));
+            for(const file of files) {
+                const stat = fs.lstatSync(path.join(__dirname, dir, file));
+                if(stat.isDirectory()) {
+                    readCommands(path.join(dir, file));
+                } else {
+                    const commandPath = path.join(dir, file);
+                    const exportedCommand = require(`./${commandPath}`);
+                    new Command(exportedCommand, this.client, this.defaultPrefix);
+                }
+            }    
+        }
+
+        readCommands(this.commandsDir)
+
+        return this;
     }
 }
 

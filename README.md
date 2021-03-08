@@ -11,11 +11,26 @@ const simple_djs = require('@zs_master1/simple-djs');
 new simple_djs('Your bots token here')
 .allowsDMs(true) //defaults to false
 .allowGuilds(true) //defaults to true
-.setCommandsDir('cmds'); //defaults to 'commands'
-
+.setCommandsDir('cmds') //defaults to 'commands'
+.load() //Loads the commands
 ```
 
 #### A command file
 ```js
-//Working on it
+module.exports = {
+    aliases: ['ping', 'test'],
+    description: '',
+    allowDMs: true,
+    allowGuilds: true,
+    arguments: [
+        {
+            name: 'argument',
+            description: 'This is an argument',
+            type: 3,
+        }
+    ],
+    execute: (client, message, args) => {
+        //do something
+    }
+}
 ```

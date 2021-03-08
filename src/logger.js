@@ -26,6 +26,14 @@ class Logger {
     info(information) {
         log(information, 'INFO');
     }
+
+    /**
+     * @param { String } verbose 
+     */
+
+    verbose(verbose) {
+        log(verbose, 'VERBOSE');
+    }
 }
 
 module.exports = Logger;
