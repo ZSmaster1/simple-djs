@@ -1,3 +1,7 @@
+<center>
+    <img src='https://nodei.co/npm/@zs_master1/simple-djs.png'>
+</center>
+
 # Installation
 ```
 npm install @zs_master1/simple-djs
