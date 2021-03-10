@@ -29,6 +29,28 @@ class Main {
         return this;
     }
 
+    /**
+     * @param { Boolean } true_or_false 
+     */
+     allowsDMs(true_or_false) {
+        if(typeof true_or_false !== 'boolean') {
+            this.log.warn('true_or_false must be true or false');
+            return;
+        }
+        this.DMs = true_or_false;
+        return this;
+    }
+    /**
+     * @param { Boolean } true_or_false 
+     */
+    allowGuilds(true_or_false) {
+        if(typeof true_or_false !== 'boolean') {
+            this.log.warn('true_or_false must be true or false');
+            return;
+        }
+        this.guilds = true_or_false;
+        return this;
+    }
 
     /**
      * @param { String } commandsDir 
@@ -44,6 +66,20 @@ class Main {
         return this;
     }
 
+    /**
+     * @param { String } featuresDir 
+     */
+    setFeaturesDir(featuresDir) {
+        if(typeof featuresDir !== 'string') {
+            this.log.warn('featuresDir must be a string');
+            return;
+        }
+
+        this.featuresDir = featuresDir;
+
+        return this;
+    }
+
     setDefaultPrefix(prefix) {
 
         if(typeof prefix !== 'string') {
@@ -55,8 +91,7 @@ class Main {
         return this;
     }
 
-    load() {
-
+    load() {        
         if(!fs.existsSync(`./${this.commandsDir}`)) {
             this.log.error(`./${this.commandsDir} doesen't exist!`);
         }
@@ -73,6 +108,37 @@ class Main {
                     new Command(exportedCommand, this.client, this.defaultPrefix);
                 }
             }    
+        }
+
+        const loadFeatures = (dir) => {
+            const files = fs.readdirSync(path.join(__dirname, dir));
+            for(const file of files) {
+                const stat = fs.lstatSync(path.join(__dirname, dir, file));
+                if(stat.isDirectory()) {
+                    readCommands(path.join(dir, file));
+                } else {
+                    const featurePath = path.join(dir, file);
+                    const feature = require(`./${featurePath}`);
+                    if(typeof feature === 'function') {
+                        feature(this.client);
+                    } else {
+                        this.log.error(`Feature must be a function`)
+                    }
+                }
+            }
+        }
+
+        if(this.featuresDir) {
+            const checkForClient = () => {
+                if(this.client.user) {
+                    loadFeatures(this.featuresDir);
+                } else {
+                    setTimeout(() => {
+                        checkForClient();                        
+                    }, 250);
+                }
+            }
+            checkForClient();
         }
 
         readCommands(this.commandsDir)
