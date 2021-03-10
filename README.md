@@ -16,7 +16,7 @@ new simple_djs('Your bots token here')
 .allowsDMs(true) //defaults to false
 .allowGuilds(true) //defaults to true
 .setCommandsDir('cmds') //defaults to 'commands'
-.setFeeturesDir('features') //optional
+.setFeaturesDir('features') //optional
 .load() //Loads the commands
 ```
 
