@@ -22,33 +22,8 @@ class Main {
         }
 
         this.client = new Client(token);
-        this.DMs = false;
-        this.guilds = true;
         this.commandsDir = 'commands';
 
-        return this;
-    }
-
-    /**
-     * @param { Boolean } true_or_false 
-     */
-     allowsDMs(true_or_false) {
-        if(typeof true_or_false !== 'boolean') {
-            this.log.warn('true_or_false must be true or false');
-            return;
-        }
-        this.DMs = true_or_false;
-        return this;
-    }
-    /**
-     * @param { Boolean } true_or_false 
-     */
-    allowGuilds(true_or_false) {
-        if(typeof true_or_false !== 'boolean') {
-            this.log.warn('true_or_false must be true or false');
-            return;
-        }
-        this.guilds = true_or_false;
         return this;
     }
 
@@ -80,6 +55,9 @@ class Main {
         return this;
     }
 
+    /**
+     * @param { String } prefix 
+     */
     setDefaultPrefix(prefix) {
 
         if(typeof prefix !== 'string') {
@@ -142,8 +120,6 @@ class Main {
         }
 
         readCommands(this.commandsDir)
-
-        return this;
     }
 }
 
