@@ -16,6 +16,7 @@ new simple_djs('Your bots token here')
 .allowsDMs(true) //defaults to false
 .allowGuilds(true) //defaults to true
 .setCommandsDir('cmds') //defaults to 'commands'
+.setFeeturesDir('features') //optional
 .load() //Loads the commands
 ```
 
@@ -36,5 +37,12 @@ module.exports = {
     execute: (client, message, args) => {
         //do something
     }
+}
+```
+
+#### A feature file
+```js
+module.exports = (client) => {
+    //do something
 }
 ```
