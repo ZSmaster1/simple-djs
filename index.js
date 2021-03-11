@@ -24,6 +24,8 @@ class Main {
         this.client = new Client(token);
         this.commandsDir = 'commands';
 
+        this.commands = [];
+
         return this;
     }
 
@@ -84,6 +86,7 @@ class Main {
                     const commandPath = path.join(dir, file);
                     const exportedCommand = require(`./${commandPath}`);
                     new Command(exportedCommand, this.client, this.defaultPrefix);
+                    this.commands.push(exportedCommand);
                 }
             }    
         }
@@ -112,14 +115,20 @@ class Main {
                     loadFeatures(this.featuresDir);
                 } else {
                     setTimeout(() => {
-                        checkForClient();                        
+                        checkForClient();
                     }, 250);
                 }
             }
             checkForClient();
         }
 
-        readCommands(this.commandsDir)
+        readCommands(this.commandsDir);
+        
+        return this;
+    }
+
+    getCommands() {
+        return this.commands;
     }
 }
 
