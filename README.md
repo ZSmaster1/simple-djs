@@ -30,7 +30,7 @@ module.exports = {
         {
             name: 'argument',
             description: 'This is an argument',
-            type: 3, //types can be found at [Discord Docs](https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype)
+            type: 3,
             required: false, //defaults to true
         }
     ],
@@ -39,6 +39,7 @@ module.exports = {
     }
 }
 ```
+Command argument types can be found at [Discord Docs](https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype)
 
 #### A feature file
 ```js
