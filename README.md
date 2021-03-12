@@ -23,8 +23,9 @@ new simple_djs('Your bots token here')
 module.exports = {
     aliases: ['ping', 'test'],
     description: '',
-    allowDMs: true,
-    allowGuilds: true,
+    allowDMs: true, //defaults to false
+    allowGuilds: true, //defaults to true
+    slashCommand: true, //defaults to false
     arguments: [
         {
             name: 'argument',
