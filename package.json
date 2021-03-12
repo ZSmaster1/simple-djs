@@ -1,6 +1,6 @@
 {
   "name": "@zs_master1/simple-djs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A fast and beginner friendly way to use the discord.js package",
   "main": "index.js",
   "repository": {
