@@ -12,6 +12,7 @@ class Command {
         this.dms = exported.allowDMs || false;
         this.guilds = exported.allowGuilds || true;
         this.aliases = exported.aliases;
+        this.isSlashCommand = false || exported.slashCommand;
 
         if(!this.aliases) {
             this.log.error('please specify an alias');
