@@ -38,6 +38,47 @@ class Command {
             this.aliases = [this.aliases];
         }
 
+        if(this.isSlashCommand === true) {
+            let constructor = {
+                data: {
+                    name: this.aliases[0],
+                    description: exported.description,
+                }
+            }
+
+            if(exported.arguments) {
+
+                constructor.data.options = [];
+
+                exported.arguments.forEach((argument) => {
+                    if(!argument.name) {
+                        this.log.error('Argument name missing');
+                    }
+
+                    if(!argument.description) {
+                        this.log.error('Argument description missing');
+                    }
+
+                    if(!argument.type) {
+                        this.log.error('Argument type missing');
+                    }
+
+                    constructor.data.options.push({
+                        name: argument.name,
+                        description: argument.description,
+                        type: argument.type,
+                        required: argument.required || true,
+                    })
+                })
+            }
+
+            client.api.applications(client.user.id).commands.post(constructor).then(() => {
+                this.log.verbose(`Slash Command registered: /${constructor.data.name}`);
+            }).catch((err) => {
+                this.log.warn(`Error registering Slash Command /${constructor.data.name} because ${err}`);
+            })
+        }
+
         client.on('message', (message) => {
             if(message.channel.type === 'dm' && this.dms === false) return;
             if(message.guild && this.guilds === false) return;

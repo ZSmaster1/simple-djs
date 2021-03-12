@@ -103,7 +103,7 @@ class Main {
                     if(typeof feature === 'function') {
                         feature(this.client);
                     } else {
-                        this.log.error(`Feature must be a function`)
+                        this.log.error(`Feature must be a function`);
                     }
                 }
             }
@@ -123,6 +123,8 @@ class Main {
         }
 
         readCommands(this.commandsDir);
+
+        this.log.warn(`Slash commands will not work yet because that feature is still in beta stage`);
         
         return this;
     }

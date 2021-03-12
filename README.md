@@ -30,7 +30,8 @@ module.exports = {
         {
             name: 'argument',
             description: 'This is an argument',
-            type: 3,
+            type: 3, //types can be found at [Discord Docs](https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype)
+            required: false, //defaults to true
         }
     ],
     execute: (client, message, args) => {
