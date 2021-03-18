@@ -96,7 +96,7 @@ class Main {
             for(const file of files) {
                 const stat = fs.lstatSync(path.join(__dirname, dir, file));
                 if(stat.isDirectory()) {
-                    readCommands(path.join(dir, file));
+                    loadFeatures(path.join(dir, file));
                 } else {
                     const featurePath = path.join(dir, file);
                     const feature = require(`./${featurePath}`);
